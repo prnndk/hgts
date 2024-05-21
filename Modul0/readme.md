@@ -26,7 +26,7 @@ Akses halaman download XAMPP pada link [berikut](https://www.apachefriends.org/d
 ![alt text](source/xampp.png)
 Pilih download pada versi `8.2.12` tunggu hingga proses download dimulai. Lakukan instalasi seperti biasa hingga proses selesai.
 
-Buka terminal anda (cmd atau powershell), ketikkan perintah  `SET PATH=%PATH%;C:\your\xampp\php`
+Buka terminal anda (cmd atau powershell), ketikkan perintah  `SET PATH=%PATH%;C:\xampp\php`
 >setelah titik koma merupakan lokasi instalasi xampp anda, ubah jika berbeda dengan folder default installation
 
 Setelah selesai melakukan proses instalasi, buka terminal di windows ketikkan `php -v` jika berhasil maka akan muncul php version yang telah diinstall.
