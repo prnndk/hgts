@@ -111,16 +111,169 @@ public static function getAllTamu(): array {
 Untuk lebih detail mengenai model, disarankan untuk mengakses langsung dokumentasi laravel untuk model yang terdapat pada link [ini](https://laravel.com/docs/11.x/eloquent).
 
 ### View
-View merupakan file berisi kode yang akan menampilkan desain dari suatu web. Pada laravel, file view terletak di direktori <code>resources/views/</code>. File view dari laravel menggunakan [Blade templating engine](https://laravel.com/docs/11.x/blade).
+View merupakan file berisi kode yang akan menampilkan desain dari suatu web. Pada laravel, file view terletak di direktori <code>resources/views/</code>. File view dari laravel menggunakan [Blade templating engine](https://laravel.com/docs/11.x/blade). Secara sederhana, dengan menggunakan sistem templating dari laravel ini, kita dapat melakukan hal yang tidak bisa file dengan ekstensi html biasa lakukan.
 
-Untuk lebih detail mengenai pembuatan view, dapat mengikuti petunjuk pada gambar dibawah ini.
+Dengan menggunakan templating ini, kita bisa membuat sistem komponen untuk sebuah elemen yang akan kita gunakan secara terus menerus. Kita juga dapat melakukan beberapa operasi yang mempermudah dalam mengolah data yang diberikan ke view menggunakan templating engine ini.
+
+Salah satu yang paling sering digunakan adalah <code>Layouting</code>. Fungsi dari layouting adalah untuk mengatur tata letak halaman web secara efisien dan konsisten.
+
+Untuk membuat view, dapat mengikuti petunjuk pada gambar dibawah ini.
 
 ![image](https://github.com/prnndk/hgts-laravel/assets/136108856/16d4a511-5896-4235-87af-818fd2738280)
 
-Berikut contoh potongan kode dari halaman form untuk menampilkan data tamu.
+Berikut contoh struktur direktori untuk <code>/resources/views</code>.
+
+```txt
+views/
+├── dashboard
+│   ├── keperluan-kunjungan
+│   ├── layouts
+│   │   ├── main.blade.php
+│   │   ├── navbar.blade.php
+│   │   └── sidebar.blade.php
+│   └── main.blade.php
+├── dashboard.blade.php
+├── layouts
+│   ├── header.blade.php
+│   └── main.blade.php
+├── login.blade.php
+├── main.blade.php
+├── newlogin.blade.php
+├── test.blade.php
+└── welcome.blade.php
+```
+
+Dari struktur direktori tersebut, dapat diketahui flow untuk halaman dashboard yaitu:
+
+```txt
+layouts/navbar.bladephp + layouts/navbar.blade.php > layouts/main.blade.php > dashboard/main.blade.php
+```
+
+Berikut salah satu contoh komponen navbar dengan menggunakan layouting.
+
+```html
+<!-- /resources/views/dashboard/layouts/navbar.blade.php -->
+
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+    <i class="fa fa-bars"></i>
+  </button>
+  <ul class="navbar-nav ml-auto">
+
+    <div class="topbar-divider d-none d-sm-block"></div>
+    <li class="nav-item dropdown no-arrow">
+      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+          <img class="img-profile rounded-circle"
+                src="https://ui-avatars.com/api/?name=John+Doe">
+      </a>
+      <!-- Dropdown - User Information -->
+      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+            aria-labelledby="userDropdown">
+        <a class="dropdown-item" href="#">
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+            Profile
+        </a>
+        <a class="dropdown-item" href="#">
+            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+            Settings
+        </a>
+        <a class="dropdown-item" href="#">
+            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+            Activity Log
+        </a>
+        <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+            Logout
+          </a>
+      </div>
+    </li>
+  </ul>
+</nav>
+```
+
+Setelah itu, komponen-komponen yang telah dibuat dapat dipanggil di file lain contohnya <code>/resources/views/dashboard/layouts/main.blade.php</code>. Berikut contoh potongan kode dari file tersebut.
+
+```html
+<!-- /resources/views/dashboard/layouts/main.blade.php -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>
+      @yield('title') - BukuTamu
+  </title>
+
+  <!-- Custom fonts for this template-->
+  <link href="{{asset("/sb-admin/vendor/fontawesome-free/css/all.min.css")}}" rel="stylesheet" type="text/css">
+  <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{{asset("/sb-admin/css/sb-admin-2.min.css")}}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+  <!-- Sidebar -->
+  @include('dashboard.layouts.sidebar')
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <!-- Topbar -->
+      @include('dashboard.layouts.navbar')
+
+      <!-- Begin Page Content -->
+        <div class="container-fluid">
+            @yield('content')
+        </div>
+
+      <!-- dan seterusnya -->
+
+<!-- Bootstrap core JavaScript-->
+<script src="{{asset("sb-admin/vendor/jquery/jquery.min.js")}}"></script>
+<script src="{{asset("sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{asset("sb-admin/vendor/jquery-easing/jquery.easing.min.js")}}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{{asset("sb-admin/js/sb-admin-2.min.js")}}"></script>
+
+<!-- Page level plugins -->
+<script src="{{asset("sb-admin/vendor/chart.js/Chart.min.js")}}"></script>
+
+</body>
+
+</html>
+```
+
+Kalian bisa membuat banyak @yield(...) untuk berbagai macam style layout berbeda di folder <code>/layouts/</code> kalian dan menggunakan @section(...) untuk berbagai macam style yang ingin kalian aplikasikan di page view kalian.
+
+Berikut contoh potongan kode dari halaman form untuk menampilkan data tamu dengan menggunakan komponen yang telah dibuat sebelumnya. 
 
 ```html
 <!-- resources/views/dashboard/main.blade.php -->
+
 @extends('dashboard.layouts.main')
 @section('title', 'Dashboard')
 
@@ -145,6 +298,7 @@ Berikut contoh potongan kode dari halaman form untuk menampilkan data tamu.
           </form>
         </div>
     <!-- dan seterusnya -->
+@endsection
 ```
 
 Untuk lebih detailnya mengenai view, disarankan untuk mengakses langsung dokumentasi laravel untuk model yang terdapat pada link [ini](https://laravel.com/docs/11.x/views).
