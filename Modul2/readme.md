@@ -3,6 +3,10 @@
 ## Daftar Isi
 
 1. [Pendahuluan](#pendahuluan)
+2. [Migration](#migration)
+3. [Eloquent](#eloquent)
+4. [CRUD](#crud-create-read-update-and-delete)
+5. [Authentication](#authentication)
 
 ## Pendahuluan
 
