@@ -3,24 +3,28 @@
 Pada modul ini, akan belajar mengenai apa saja yang diperlukan sebelum dapat menjalankan Laravel di laptop anda.
 
 ## Daftar Isi
+
 1. [Instalasi XAMPP](#instalasi-xampp)
 2. [Instalasi Composer](#instalasi-composer)
 3. [Instalasi Laravel](#instalasi-laravel)
 
 ## Pendahuluan
 
-Laravel merupakan salah satu kerangka kerja berbasis (framework) PHP yang cukup terkenal dan sering digunakan. Untuk dapat menggunakan Laravel diperlukan beberapa syarat agar dapat berjalan di device kita. 
+Laravel merupakan salah satu kerangka kerja berbasis (framework) PHP yang cukup terkenal dan sering digunakan. Untuk dapat menggunakan Laravel diperlukan beberapa syarat agar dapat berjalan di device kita.
 
 Berikut Merupakan beberapa tool yang diperlukan untuk menjalankan Laravel:
+
 - PHP Version minimal `8.2` atau lebih
 - Database Server (MySQL, PostgreSQL dan lainnya)
 - Composer
 
 Untuk tambahan perlu install beberapa tools seperti:
+
 - Database Client (PhpMyAdmin,HeidiSQL dan lainnya)
 - Code Editor (Visual Studio Code, PHPStorm, dan lainnya)
 
 ## Instalasi XAMPP
+
 XAMPP merupakan salah satu software yang dapat digunakan untuk menjalankan PHP dan MySQL di device kita.
 Akses halaman download XAMPP pada link [berikut](https://www.apachefriends.org/download.html)
 ![alt text](source/xampp.png)
@@ -57,7 +61,3 @@ Selanjutnya coba untuk membuka directory yang tadi dibuat dengan perintah `cd`. 
 ![alt text](source/artisan.png)
 
 Maka sudah selesai, anda berhasil membuat sebuah project laravel!
-
-
-
-
