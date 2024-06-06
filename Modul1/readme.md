@@ -101,6 +101,8 @@ Dari struktur direktori tersebut, dapat diketahui flow untuk halaman dashboard y
 layouts/navbar.bladephp + layouts/sidebar.blade.php > layouts/main.blade.php > dashboard/main.blade.php
 ```
 
+Download Dashboard Template pada [link ini](https://its.id/m/DashboardTemplateHGTS24)
+
 Berikut salah satu contoh komponen navbar dengan menggunakan layouting.
 
 ```html
